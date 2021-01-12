@@ -5,10 +5,10 @@
    "footer":"footer.md",
    "tutorials":[
        {
-         "description":"Details about Jaeger Operator",
+         "description":"How to verify that Jaeger Operator installation is successful.",
          "duration":"30 min",
-         "tutorial_name":"architectural-flow.md",
-         "title":"About Jaeger Operator"
+         "tutorial_name":"operator-installation-verification-tutorial.md",
+         "title":"Jaeger Operator Installation Verification Tutorial"
       },
      {
          "description":"create Instance of jaeger operator",
@@ -20,9 +20,9 @@
    ],
    "usefulLinks":[
       {
-         "title":"etcd Operator",
-         "description":"etcd Operator ",
-         "url":"https://operatorhub.io/operator/etcd"
+         "title":"Community Jaeger Operator",
+         "description":"Community Jaeger Operator ",
+         "url":"https://operatorhub.io/operator/jaeger"
       }
    ]
 }
