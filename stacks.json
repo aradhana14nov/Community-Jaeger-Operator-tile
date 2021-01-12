@@ -16,8 +16,8 @@
   "has_support": true,
   "has_dataset": false,
   "has_api": false,
-  "git_url": "https://github.com/aradhana14nov/Community-Jaeger-Operator.git",
-  "git_commit": "6133281d97ec4ad46cdce6bc96bb64b4c3619687",
+  "git_url": "https://github.com/aradhana14nov/Community-Jaeger-Operator-tile.git",
+  "git_commit": "66a2ca802a2388535f0183043fc481d4c4a6d725",
   "installTime": "5 minutes",
   "isStacksSaved": true
 }
