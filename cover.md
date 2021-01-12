@@ -1,6 +1,7 @@
-# Jaeger Operator
+<h1 align="center">Community Jaeger Operator</h1>
 
-### Overview
+![Logo](_images/jaeger-logo.png)
+
 
 Jaeger, inspired by Dapper and OpenZipkin, is a distributed tracing system released as open source by Uber Technologies. It is used for monitoring and troubleshooting microservices-based distributed systems.
 
@@ -39,10 +40,10 @@ Jaeger can be deployed either as all-in-one binary, where all Jaeger backend com
 
 The following diagram illustrates the overall architecture:
 Illustration of direct-to-storage architecture:
-![](C:/Community Jaeger Operator/_images/jaeger_arch.png)
+![](_images/jaeger_arch.png)
 
 Illustration of architecture with Kafka as intermediate buffer:
-![](C:/Community Jaeger Operator/_images/jaeger_arch_2.png)
+![](_images/jaeger_arch_2.png)
 
 Jaeger client libraries:
 Jaeger client, which is part of your application and is responsible for creating tracers and spans in the application code. The Jaeger client creates trace spans in the application code which get picked up by the Jaeger agent over UDP and forwarded to the Jaeger collector using a secured gRPC connection. 
