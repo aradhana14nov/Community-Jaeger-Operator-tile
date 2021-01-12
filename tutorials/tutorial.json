@@ -1,27 +1,26 @@
 {
-   "name":"jaeger Operator Tutorial",
+   "name":"Community Jaeger Operator Tutorial",
    "appLayout":"accordion",
    "appTheme":"g90",
    "footer":"footer.md",
    "tutorials":[
-       {
-         "description":"How to verify that Jaeger Operator installation is successful.",
-         "duration":"30 min",
-         "tutorial_name":"operator-installation-verification-tutorial.md",
-         "title":"Jaeger Operator Installation Verification Tutorial"
-      },
-     {
-         "description":"create Instance of jaeger operator",
+      {
+         "description":" A User Guide for verification of Jaeger Operator Installation",
          "duration":"5 min",
+         "tutorial_name":"operator-installation-verification-tutorial.md",
+         "title":"Community Jaeger Operator Installation Verification Tutorial"
+      },
+      {
+         "description":" Community Jaeger Operator Instance Creation tutorial",
+         "duration":"15 min",
          "tutorial_name":"create_instance_of_Jaeger_Operator.md",
-         "title":"Create Instance of Jaeger Operator"
+         "title":"Community Jaeger Operator Instance Creation tutorial"
       }
-      
    ],
    "usefulLinks":[
       {
          "title":"Community Jaeger Operator",
-         "description":"Community Jaeger Operator ",
+         "description":"Community Jaeger Operator",
          "url":"https://operatorhub.io/operator/jaeger"
       }
    ]
