@@ -1,0 +1,28 @@
+{
+   "name":"jaeger Operator Tutorial",
+   "appLayout":"accordion",
+   "appTheme":"g90",
+   "footer":"footer.md",
+   "tutorials":[
+       {
+         "description":"Details about Jaeger Operator",
+         "duration":"30 min",
+         "tutorial_name":"architectural-flow.md",
+         "title":"About Jaeger Operator"
+      },
+     {
+         "description":"create Instance of jaeger operator",
+         "duration":"5 min",
+         "tutorial_name":"create_instance_of_Jaeger_Operator.md",
+         "title":"Create Instance of Jaeger Operator"
+      },
+      
+   ],
+   "usefulLinks":[
+      {
+         "title":"etcd Operator",
+         "description":"etcd Operator ",
+         "url":"https://operatorhub.io/operator/etcd"
+      }
+   ]
+}
