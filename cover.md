@@ -40,9 +40,13 @@ Jaeger can be deployed either as all-in-one binary, where all Jaeger backend com
 
 The following diagram illustrates the overall architecture:
 Illustration of direct-to-storage architecture:
+
 ![](_images/jaeger_arch.png)
 
+
 Illustration of architecture with Kafka as intermediate buffer:
+
+
 ![](_images/jaeger_arch_2.png)
 
 Jaeger client libraries:
