@@ -49,21 +49,21 @@ Illustration of architecture with Kafka as intermediate buffer:
 
 ![](_images/architecture-v2.png)
 
-Jaeger client libraries:
+**Jaeger client libraries:**
 Jaeger client, which is part of your application and is responsible for creating tracers and spans in the application code. The Jaeger client creates trace spans in the application code which get picked up by the Jaeger agent over UDP and forwarded to the Jaeger collector using a secured gRPC connection. 
 
-Agent:
+**Agent:**
 The Jaeger agent is a network daemon that listens for spans sent over UDP, which it batches and sends to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 
-Collector:
+**Collector:**
 The Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline. Currently our pipeline validates traces, indexes them, performs any transformations, and finally stores them.Jaeger collector stores the data so that you can query and visualize the trace spans using the Jaeger query service. 
 
 Jaeger’s storage is a pluggable component which currently supports Cassandra, Elasticsearch and Kafka.
 
-Query:
+**Query:**
 Query is a service that retrieves traces from storage and hosts a UI to display them.
 
-Ingester:
+**Ingester:**
 Ingester is a service that reads from Kafka topic and writes to another storage backend (Cassandra, Elasticsearch).
 
 
