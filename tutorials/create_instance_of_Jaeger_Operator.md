@@ -14,62 +14,58 @@ cat <<'EOF' >jaegerInstance.yaml
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
-  name: jaeger-all-in-one-inmemory
+  name: jaeger
 EOF
 ```
 
 **Step 2:** create Jaeger Operator instance in the namespace "operators"
 
 ```execute
-kubectl create -f jaegerInstance.yaml -n operators
+kubectl create -f jaegerInstance.yaml 
 ```
 
 You will see the following output:
 
 ```
-jaeger.jaegertracing.io/jaeger-all-in-one-inmemory created
+jaeger.jaegertracing.io/jaeger created
 ```
 
 Check the Pods status:
 
 ```execute
-kubectl get pods -n operators
+kubectl get pods
 ```
 
 You will see similar to this output:
 
 ```
-NAME                                         READY   STATUS    RESTARTS   AGE
-jaeger-all-in-one-inmemory-d98868849-gd5zv   1/1     Running   0          3m39s
-jaeger-operator-76bdc75548-n8r6n             1/1     Running   0          11m
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/jaeger-788f55ddc9-2cj4n   1/1     Running   0          19s
 ```
 
 Check all the kubernetes resources:
 
 ```execute
-kubectl get all -n operators
+kubectl get all
 ```
 
 
 You will see similar to this output:
 
 ```
-NAME                                             READY   STATUS    RESTARTS   AGE
-pod/jaeger-all-in-one-inmemory-d98868849-gd5zv   1/1     Running   0          10s
-pod/jaeger-operator-76bdc75548-n8r6n             1/1     Running   0          8m16s
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/jaeger-788f55ddc9-2cj4n   1/1     Running   0          19s
 
-NAME                                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
-service/jaeger-all-in-one-inmemory-agent                ClusterIP   None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      10s
-service/jaeger-all-in-one-inmemory-collector            ClusterIP   10.104.52.124   <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   10s
-service/jaeger-all-in-one-inmemory-collector-headless   ClusterIP   None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   10s
-service/jaeger-all-in-one-inmemory-query                ClusterIP   10.96.225.160   <none>        16686/TCP                                10s
-service/jaeger-operator-metrics                         ClusterIP   10.110.183.94   <none>        8383/TCP,8686/TCP                        8m5s
+NAME                                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
+service/jaeger-agent                ClusterIP   None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      19s
+service/jaeger-collector            ClusterIP   10.111.142.2    <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   19s
+service/jaeger-collector-headless   ClusterIP   None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   19s
+service/jaeger-query                ClusterIP   10.109.253.83   <none>        16686/TCP                                19s
+service/kubernetes                  ClusterIP   10.96.0.1       <none>        443/TCP                                  126m
 
-NAME                                         READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/jaeger-all-in-one-inmemory   1/1     1            1           10s
-deployment.apps/jaeger-operator              1/1     1            1           8m16s
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/jaeger   1/1     1            1           19s
 
-NAME                                                   DESIRED   CURRENT   READY   AGE
-replicaset.apps/jaeger-all-in-one-inmemory-d98868849   1         1         1       10s
-replicaset.apps/jaeger-operator-76bdc75548             1         1         1       8m16s
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/jaeger-788f55ddc9   1         1         1       19s
 ```
