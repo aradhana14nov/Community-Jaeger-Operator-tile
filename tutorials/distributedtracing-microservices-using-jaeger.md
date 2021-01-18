@@ -109,20 +109,23 @@ deployment.apps/auto-tracing-mutating-webhook created
 mutatingwebhookconfiguration.admissionregistration.k8s.io/auto-tracing-mutating-webhook created
 ```
 
+
 3. We need to edit "service/auto-tracing-mutating-webhook" from CluaterIP to "LoadBalancer" using below command:
 
    ```execute
    kubectl edit service/auto-tracing-mutating-webhook
   ```
   
-  on vi editor, change Type from "ClusterIP" to "LoadBalancer"
   
+on vi editor, change Type from "ClusterIP" to "LoadBalancer"
   
-4. Chaeck the status of all the resources created are in "Running" state:
+ 
+4. Check the status of all the resources created are in "Running" state:
 
- ```execute
-  kubectl get all
+```execute
+kubectl get all
  ```
+ 
  A similar to this output will be shown:
  
 ``` 
@@ -154,6 +157,7 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
  kubectl label namespace default autotrace=enabled
  ```
  
+ 
 6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
  
     We have "services.yaml" file at : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
@@ -162,9 +166,9 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
    Each of the services is, by default, a completely trace unaware Spring Boot application.
    Each of these services is tagged with the **autotrace: enabled** label so that our webhook knows to inject instrumentation into the application at deploy time.
    
-   example:
-   ```
-   spec:
+example:
+```
+spec:
   replicas: 1
   selector:
     matchLabels:
@@ -175,9 +179,9 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
       labels:
         app: service-a
         **autotrace: enabled**
-   ```
+ ```
     
-   Deploy the services.yaml using below command:
+ Deploy the services.yaml using below command:
     
   ```execute
   kubectl create -f /home/student/projects/Community-Jaeger-Operator-tile/services.yaml
