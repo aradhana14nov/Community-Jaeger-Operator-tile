@@ -57,7 +57,7 @@ Jaeger client, which is part of your application and is responsible for creating
 The Jaeger agent is a network daemon that listens for spans sent over UDP, which it batches and sends to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 
 **Collector:**
-The Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline. Currently our pipeline validates traces, indexes them, performs any transformations, and finally stores them.Jaeger collector stores the data so that you can query and visualize the trace spans using the Jaeger query service. 
+The Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline. Currently pipeline validates traces, indexes them, performs any transformations, and finally stores them.Jaeger collector stores the data so that you can query and visualize the trace spans using the Jaeger query service. 
 
 Jaeger’s storage is a pluggable component which currently supports Cassandra, Elasticsearch and Kafka.
 
