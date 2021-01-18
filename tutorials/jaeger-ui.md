@@ -34,7 +34,7 @@ You can also see the logs and warning details against each services operations: 
 ![](_images/logging-warning-msg.png)
 
 
-6. You can compare two traces by selecting the check box corresponding to each trace id and click on "Compare" option as shown in below snapshot a:
+6. You can compare two traces by selecting the check box corresponding to each trace id and click on "Compare" option as shown in below snapshot:
 
 
 ![](_images/compare-services-traces.png)
