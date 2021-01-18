@@ -102,15 +102,21 @@ service/kubernetes                      ClusterIP      10.96.0.1       <none>   
 
 The Port value to access Jaeger UI using "service/jaeger-query" is :30709
 
-We will use this port to access Jaeger UI using below URL: 
+In your case you can get this Port number using below command:
 
-http://##DNS.ip##:<port-number> 
-  
-The <port-number> in above URL can be get using below command:
   
 ```execute
- kubectl get svc|grep LoadBalancer|tr -s ' ' | cut -d ' ' -f 5|cut -d ':' -f 2|cut -d "/" -f 1
- ```
+ export PORT=$(kubectl get svc|grep jaeger-query|tr -s ' ' | cut -d ' ' -f 5|cut -d ':' -f 2|cut -d "/" -f 1)
+ echo $PORT
+```
+
+
+We will use this PORT value to access Jaeger UI using below URL: 
+
+```copycommand
+http://##DNS.ip##:PORT
+```
+  
 
 You will see the Jaeger UI as below :
 
