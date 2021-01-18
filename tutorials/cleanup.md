@@ -8,7 +8,7 @@ description: This tutorial explains how to cleanup Operator
 
 
 
-***Delete the operator's CRs by kubectl delete commands :***
+***Delete the operator's custom resource by kubectl delete commands :***
 
 Example:
  
@@ -18,7 +18,7 @@ Example:
 
 Note: Here jaegerInstance.yaml  is the CR of the Jaeger Operator Instance.
 
-Similarly,delete all the CRs.
+Similarly,delete all the custom resource.
  
 
 ***Delete the operator by kubectl delete command:***
