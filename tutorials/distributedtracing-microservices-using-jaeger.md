@@ -20,6 +20,8 @@ Distributed tracing enables developers to perform:
 
 ### Key Terms in Distributed Tracing
 
+Below are few terminology used while doing auto-tracing of micro-services.
+
 **Span:** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
 The recommended solution is to annotate spans with tags or logs.
 
