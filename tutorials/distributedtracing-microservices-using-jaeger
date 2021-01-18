@@ -154,12 +154,28 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
  kubectl label namespace default autotrace=enabled
  ```
  
- 6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
+6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
  
     We have "services.yaml" file at : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
     
    "services.yaml" creates a chain of services A, B and C. A calls B, B calls C and C calls upstream to the world clock API. 
    Each of the services is, by default, a completely trace unaware Spring Boot application.
+   Each of these services is tagged with the **autotrace: enabled** label so that our webhook knows to inject instrumentation into the application at deploy time.
+   
+   example:
+   ```
+   spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      name: service-a
+      labels:
+        app: service-a
+        **autotrace: enabled**
+   ```
     
    Deploy the services.yaml using below command:
     
@@ -167,6 +183,61 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
   kubectl create -f /home/student/projects/Community-Jaeger-Operator-tile/services.yaml
   ```
   
+7. Check that all the created resources are in "Running" state using below command:
+  
+  ```execute
+  kubectl get all
+  ```
+  
+ Output similar to this will be shown:
+  
+``` 
+NAME                                                 READY   STATUS    RESTARTS   AGE
+pod/auto-tracing-mutating-webhook-67bd68dd77-ks7km   1/1     Running   0          3m26s
+pod/jaeger-788f55ddc9-2cj4n                          1/1     Running   0          6m11s
+pod/service-a-56dc4665b7-5jv59                       1/1     Running   0          19s
+pod/service-b-66944b7dcc-lgplg                       1/1     Running   0          19s
+pod/service-c-78bb44b7d5-2wlvk                       1/1     Running   0          19s
+
+NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
+service/auto-tracing-mutating-webhook   LoadBalancer   10.100.35.237   <pending>     443:32687/TCP                            3m26s
+service/jaeger-agent                    ClusterIP      None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      6m11s
+service/jaeger-collector                ClusterIP      10.111.142.2    <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   6m11s
+service/jaeger-collector-headless       ClusterIP      None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   6m11s
+service/jaeger-query                    LoadBalancer   10.109.253.83   <pending>     16686:30709/TCP                          6m11s
+service/kubernetes                      ClusterIP      10.96.0.1       <none>        443/TCP                                  132m
+service/service-a                       ClusterIP      10.100.208.58   <none>        8080/TCP                                 19s
+service/service-b                       ClusterIP      10.104.194.67   <none>        8080/TCP                                 19s
+service/service-c                       ClusterIP      10.101.33.170   <none>        8080/TCP                                 19s
+
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/auto-tracing-mutating-webhook   1/1     1            1           3m26s
+deployment.apps/jaeger                          1/1     1            1           6m11s
+deployment.apps/service-a                       1/1     1            1           19s
+deployment.apps/service-b                       1/1     1            1           19s
+deployment.apps/service-c                       1/1     1            1           19s
+
+NAME                                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/auto-tracing-mutating-webhook-67bd68dd77   1         1         1       3m26s
+replicaset.apps/jaeger-788f55ddc9                          1         1         1       6m11s
+replicaset.apps/service-a-56dc4665b7                       1         1         1       19s
+replicaset.apps/service-b-66944b7dcc                       1         1         1       19s
+replicaset.apps/service-c-78bb44b7d5                       1         1         1       19s
+```
+
+8. Edit the "service/service-a" type from "ClusterIP" to "LoadBalancer" using below command: 
+  
+  ```execute
+  kubectl edit service/service-a 
+ ``` 
+ 
+ On vi editor change the "Type" from "ClusterIP" to "LoadBalancer".
+ 
+ 9. Now make the request using below curl command:
+ 
+ ```execute
+ curl -s http://169.62.52.235:31907/api/json/gmt/now|jq
+ ```
   
 
  
