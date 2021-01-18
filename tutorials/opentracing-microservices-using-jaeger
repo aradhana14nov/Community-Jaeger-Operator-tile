@@ -19,7 +19,7 @@ Distributed context propagation.
 
 
 ### Key Terms in Distributed Tracing
-**Span:** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
+***Span:*** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
 The recommended solution is to annotate spans with tags or logs.
 
 **Tags:**:  are used as attributes/metadata in spans.
