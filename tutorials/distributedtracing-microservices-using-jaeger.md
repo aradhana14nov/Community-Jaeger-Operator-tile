@@ -53,11 +53,11 @@ We will use here Jaeger for distributed tracing in microservices.
 
 We will take a simple example to understand how Jaeger can be used to trace microservices.
 There’s some small amount of development required to get tracing hooked up in the first place.
-For opentracing in this perticular example of src code,Java special agent is used. 
+For opentracing in this particular example of java src code,Java special agent is used. 
 By plugging this into our app via the -javaagent JVM flag we can fully enable tracing across any commonly used 3rd party libraries without changing any code or rebuilding the project.
 What we’ll do here is automatically plug-in this agent at deployment time using a combination of webhook, init container and tweaking of environment variables to insert the agent.
 
-This full source of webhook will:
+The source code of "webhook" will:
 - Check the incoming deployment descriptor for the correct tags (autotrace: enabled). If present it’ll apply steps 2 onward, otherwise it’ll leave everything untouched.
 - Add a volume mount into which the opentracing special agent jar will be dropped.
 - Add an init container to copy the jar into the shared mount before the application boots.
