@@ -92,9 +92,9 @@ NAME                                DESIRED   CURRENT   READY   AGE
 replicaset.apps/jaeger-788f55ddc9   1         1         1       36s
 ```
 
-2. Deploy the webhook itself. The source for which is available here: 
+2. Deploy the "webhook".
 
-  We can get the webhook.yaml file from : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
+  webhook.yaml file is present inside : /home/student/projects/Community-Jaeger-Operator-tile
   
   Deploy the webhook application using below command:
   
