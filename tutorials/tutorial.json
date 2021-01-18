@@ -28,6 +28,12 @@
          "duration":"15 min",
          "tutorial_name":"jaeger-ui.md",
          "title":"Jaeger UI to see auto-tracing of microservices"
+      },
+      {
+         "description":"This tutorial Cleanup Jaeger Operator",
+         "duration":"5 min",
+         "tutorial_name":"cleanup.md",
+         "title":"Cleanup Operator"
       }
       
    ],
