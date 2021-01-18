@@ -162,7 +162,7 @@ kubectl label namespace default autotrace=enabled
  
 6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
  
-    We have "services.yaml" file at : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
+   We have "services.yaml" file to deploy at: /home/student/projects/Community-Jaeger-Operator-tile
     
    "services.yaml" creates a chain of services A, B and C. A calls B, B calls C and C calls upstream to the world clock API. 
    Each of the services is, by default, a completely trace unaware Spring Boot application.
