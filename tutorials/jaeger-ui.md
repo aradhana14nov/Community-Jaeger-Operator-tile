@@ -15,36 +15,36 @@ Follow below steps to check traces on Jaeger UI:
 
 2. Select "service-a" from drop down. You can select the operations you want to trace using "Operation" drop-down and other drop-down options provided by the UI and click on "Find Traces" button.
 
-operations
+![](_images/operations.PNG)
 
 3. You can see number of traces produces with the unique trace id as shown in below snapshot.
 
- see-detailed-trace-of-all-the-services
+ ![](_images/see-detailed-trace-of-all-the-services.PNG)
 
 4. You will see all the three services traces as shown in below snapshot:
 
-services-tracing
+![](_images/services-tracing.PNG)
 
 5. Also to get more details, you can expand the traces view by clicking on small down arrow option "v" against each services. You will see something similar to below snapshot:
 
-services-expanded-form
+![](_images/services-expanded-form.PNG)
 
 You can also see the logs and warning details against each services operations: "Pass" and "Get" which will provide important information while tracing your services.
 
-logging-warning-msg
+![](_images/logging-warning-msg.PNG)
 
 
 6. You can compare two traces by selecting the check box corresponding to each trace id and click on "Compare" option as shown in below snapshot a:
 
 
-compare-services-traces
+![](_images/compare-services-traces.PNG)
 
 You will see the flow how these services : service-a,service-b and service-c requests flows using "Compare" option.
 
-compare-services
+![](_images/compare-services.PNG)
 
 7. You can view Architecture DAG view using the option "System Architecture" "DAG" option. See below snapshot:
 
-system-architecture
+![](_images/system-architecture.PNG)
 
 
