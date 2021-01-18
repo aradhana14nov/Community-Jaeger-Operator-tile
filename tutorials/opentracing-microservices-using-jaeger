@@ -1,0 +1,10 @@
+---
+title: Enabling Distributed Tracing for Microservices With Jaeger
+description: This tutorial explains how to autotrace microservices using Jaeger
+---
+
+
+
+Distributed Tracing is a technique to follow a single transaction, which often requires multiple component interactions downstream capturing timing and other metadata throughout the transaction, then reassemble information to provide a complete picture of the application’s behavior at runtime.
+
+
