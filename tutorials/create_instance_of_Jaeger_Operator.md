@@ -73,51 +73,37 @@ replicaset.apps/jaeger-788f55ddc9   1         1         1       5s
 
 ### Access Jaeger's dashboard
 
-Execute below command to edit "service/jaeger-query" Port Type from ClusterIP to LoadBalancer  :
+To access Jaeger externally, lets first update service to use NodePort:
+
+**Execute below command to use NodePort:**
 
 ```execute
-kubectl edit service/jaeger-query
+kubectl get service/jaeger-query --output yaml > /tmp/jaeger.yaml
+sed -i "s/type: .*/type: NodePort/g" /tmp/jaeger.yaml
+kubectl patch service/jaeger-query -p "$(cat /tmp/jaeger.yaml)"
 ```
 
-In the vi editor, change the type of service from ClusterIP to "LoadBalancer" as shown in below snapshot:
+Output:
 
-![](_images/change-clustertype-to-load-balancer.png)
+```output
+service/jaeger-query patched
+```
 
-Check all the services:
+**Execute below command to update NodePort to 32379:**
 
 ```execute
-kubectl get svc
+kubectl get service/jaeger-query --output yaml > /tmp/jaeger.yaml
+sed -i "s/nodePort: .*/nodePort: 32379/g" /tmp/jaeger.yaml
+kubectl patch svc jaeger-query -p "$(cat /tmp/jaeger.yaml)"
 ```
 
-Output will be similar to below output:
+Output:
 
-```
-NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
-service/jaeger-agent                    ClusterIP      None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      4m19s
-service/jaeger-collector                ClusterIP      10.111.142.2    <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   4m19s
-service/jaeger-collector-headless       ClusterIP      None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   4m19s
-service/jaeger-query                    LoadBalancer   10.109.253.83   <pending>     16686:30709/TCP                          4m19s
-service/kubernetes                      ClusterIP      10.96.0.1       <none>        443/TCP                                  130m
+```output
+service/jaeger-query patched
 ```
 
-The Port value to access Jaeger UI using "service/jaeger-query" is :30709
-
-In your case you can get this Port number using below command:
-
-  
-```execute
- export PORT=$(kubectl get svc|grep jaeger-query|tr -s ' ' | cut -d ' ' -f 5|cut -d ':' -f 2|cut -d "/" -f 1)
- echo $PORT
-```
-
-
-We will use this PORT value to access Jaeger UI using below URL: 
-
-```copycommand
-http://##DNS.ip##:PORT
-```
-  
-
+Click on the <a href="http://##DNS.ip##:32379" target="_blank">http://##DNS.ip##:32379</a> to access Jaeger Dashboard.
 You will see the Jaeger UI as below :
 
 
