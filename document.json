@@ -21,6 +21,10 @@
 },
   "commands": [
     {
+      "description": "Clone and Prepare ",
+      "exec": "cd /home/student/projects && git clone https://github.com/aradhana14nov/Community-Jaeger-Operator-tile.git && cd Community-Jaeger-Operator-tile"
+    },
+    {
       "description": "Install Operator",
       "exec": "kubectl create -f https://operatorhub.io/install/jaeger.yaml"
     }
