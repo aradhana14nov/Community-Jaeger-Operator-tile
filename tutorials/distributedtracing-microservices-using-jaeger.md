@@ -279,7 +279,7 @@ Using Below url you can access worldclock api:
 http://##DNS.ip##:Port
 ```
 
-![](_images/services-ui.png)
+![](_images/services-ui.PNG)
  
  Now make the request using below curl command:
  
