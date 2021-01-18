@@ -116,18 +116,7 @@ replicaset.apps/jaeger-788f55ddc9   1         1         1       36s
  ```
 
 
-3. We need to edit "service/auto-tracing-mutating-webhook" from CluaterIP to "LoadBalancer" using below command:
-
-
-```execute
- kubectl edit service/auto-tracing-mutating-webhook
-```
-  
-  
-on vi editor, change Type from "ClusterIP" to "LoadBalancer"
-  
- 
-4. Check the status of all the resources created are in "Running" state:
+3. Check the status of all the resources created are in "Running" state:
 
 ```execute
 kubectl get all
@@ -158,14 +147,14 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
 
 ```
   
-5. Lastly make sure you label the target namespace so that the webhook gets activated for any deployment within using below command:
+4. Lastly make sure you label the target namespace so that the webhook gets activated for any deployment within using below command:
 
 ```execute  
 kubectl label namespace default autotrace=enabled
 ```
  
  
-6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
+5. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
  
    We have "services.yaml" file to deploy at: /home/student/projects/Community-Jaeger-Operator-tile
     
@@ -194,7 +183,7 @@ spec:
   kubectl create -f /home/student/projects/Community-Jaeger-Operator-tile/services.yaml
   ```
   
-7. Check that all the created resources are in "Running" state using below command:
+6. Check that all the created resources are in "Running" state using below command:
   
   ```execute
   kubectl get all
@@ -236,49 +225,13 @@ replicaset.apps/service-b-66944b7dcc                       1         1         1
 replicaset.apps/service-c-78bb44b7d5                       1         1         1       19s
 ```
 
-
-8. Edit the "service/service-a" type from "ClusterIP" to "LoadBalancer" using below command: 
-  
-  ```execute
-  kubectl edit service/service-a 
- ``` 
- 
- On vi editor change the "Type" from "ClusterIP" to "LoadBalancer".
- 
- Now Check that service type edited:
-  
-  ```execute
-  kubectl get svc
-  ```
-  
- Output similar to this will be shown:
-  
-``` 
-NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
-service/auto-tracing-mutating-webhook   LoadBalancer   10.100.35.237   <pending>     443:32687/TCP                            5m1s
-service/jaeger-agent                    ClusterIP      None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      7m46s
-service/jaeger-collector                ClusterIP      10.111.142.2    <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   7m46s
-service/jaeger-collector-headless       ClusterIP      None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   7m46s
-service/jaeger-query                    LoadBalancer   10.109.253.83   <pending>     16686:30709/TCP                          7m46s
-service/kubernetes                      ClusterIP      10.96.0.1       <none>        443/TCP                                  133m
-service/service-a                       LoadBalancer   10.100.208.58   <pending>     8080:31907/TCP                           114s
-service/service-b                       ClusterIP      10.104.194.67   <none>        8080/TCP                                 114s
-service/service-c                       ClusterIP      10.101.33.170   <none>        8080/TCP                                 114s
-```
- 
-9. Get the "Port" of service/service-a using below command:
+7. Get the "Port" of service/service-a using below command:
 
 ```execute
  kubectl get svc|grep service-a|tr -s ' ' | cut -d ' ' -f 5|cut -d ':' -f 2|cut -d "/" -f 1
 ```
 
-Output :
-```
-31907   
-```
-So Port value is : 31907
-
-So Replace the "Port" value from the value we retrieve using above command and access worldclock api:
+So Replace the "Port" value we retrive using above command to access worldclock api using below url:
 
 ```
 http://##DNS.ip##:Port
@@ -286,7 +239,7 @@ http://##DNS.ip##:Port
 
 ![](_images/services-ui.PNG)
  
-Use the Port value we got above and using that make the below curl command:
+Using above Port value, make the below curl command:
  
  ```copycommand
  curl -s http://##DNS.ip##:Port/api/json/gmt/now|jq
