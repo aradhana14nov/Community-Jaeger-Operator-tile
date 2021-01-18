@@ -19,24 +19,24 @@ Distributed context propagation.
 
 
 ### Key Terms in Distributed Tracing
-***Span:*** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
+**Span:** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
 The recommended solution is to annotate spans with tags or logs.
 
-**Tags:**:  are used as attributes/metadata in spans.
+**Tags:**  are used as attributes/metadata in spans.
 
 **Logs:** are like a regular log statement—they contain a timestamp and some data, but are associated with the span from which it was logged.
 
-**Span Context:**A set of trace identifiers injected into each request, which the next service will extract and use to propagate the trace.
+**Span Context:** A set of trace identifiers injected into each request, which the next service will extract and use to propagate the trace.
 
 ![](_images/span-context.PNG)
 
-**Trace:**A trace is a data/execution path through the system and can be thought of as a directed acyclic graph (DAG) of spans. 
+**Trace:** A trace is a data/execution path through the system and can be thought of as a directed acyclic graph (DAG) of spans. 
 
 Below is a diagrammatic view of DAG. Each trace has a unique identifier (ex: a trace id) for the trace, as span context that is propagated over the network to the next request.
 
 ![](_images/distributedtracingpic3.PNG)
 
-**Baggage:**Key-value pairs are added to the span context and propagated throughout the trace.
+**Baggage:** Key-value pairs are added to the span context and propagated throughout the trace.
 An external process can inject baggage by setting the special HTTP Header jaeger-baggage on a request.
 
 
