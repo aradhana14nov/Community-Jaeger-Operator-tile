@@ -15,7 +15,21 @@
          "duration":"15 min",
          "tutorial_name":"create_instance_of_Jaeger_Operator.md",
          "title":"Community Jaeger Operator Instance Creation tutorial"
+      },
+      
+      {
+         "description":"This tutorial explains how to autotrace microservices using Jaeger",
+         "duration":"30 min",
+         "tutorial_name":"distributedtracing-microservices-using-jaeger.md",
+         "title":"Enabling Distributed Tracing for Microservices With Jaeger"
+      },
+      {
+         "description":"This tutorial explains how to check distributed tracing of services using Jaeger UI",
+         "duration":"15 min",
+         "tutorial_name":"jaeger-ui.md",
+         "title":"Jaeger UI to see auto-tracing of microservices"
       }
+      
    ],
    "usefulLinks":[
       {
