@@ -267,13 +267,13 @@ service/service-c                       ClusterIP      10.101.33.170   <none>   
  kubectl get svc|grep service-a|tr -s ' ' | cut -d ' ' -f 5|cut -d ':' -f 2|cut -d "/" -f 1
 ```
 
-Current output is:
+Output :
 ```
 31907   
 ```
-so Port value is : 31907
+So Port value is : 31907
 
-Using Below url you can access worldclock api:
+So Replace the "Port" value from the value we retrieve using above command and access worldclock api:
 
 ```
 http://##DNS.ip##:Port
@@ -281,7 +281,7 @@ http://##DNS.ip##:Port
 
 ![](_images/services-ui.PNG)
  
- Now make the request using below curl command:
+Use the Port value we got above and using that make the below curl command:
  
  ```copycommand
  curl -s http://##DNS.ip##:Port/api/json/gmt/now|jq
@@ -307,7 +307,7 @@ Above output shows request is made for service-a.Services: A calls B, B calls C 
 
 Now its time to Trace these services using Jaeger UI.
 
-Please refer tuturial "Jaeger-UI" to check how we can trace these services.
+Please refer tuturial "Jaeger-UI" to check how we can trace these services on Jaeger UI.
   
 
  
