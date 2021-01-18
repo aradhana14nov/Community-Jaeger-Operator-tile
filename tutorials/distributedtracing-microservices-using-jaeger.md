@@ -103,18 +103,19 @@ replicaset.apps/jaeger-788f55ddc9   1         1         1       36s
   
   You will see below output:
   
-```
-service/auto-tracing-mutating-webhook created
-deployment.apps/auto-tracing-mutating-webhook created
-mutatingwebhookconfiguration.admissionregistration.k8s.io/auto-tracing-mutating-webhook created
-```
+ ```
+ service/auto-tracing-mutating-webhook created
+ deployment.apps/auto-tracing-mutating-webhook created
+ mutatingwebhookconfiguration.admissionregistration.k8s.io/auto-tracing-mutating-webhook created
+ ```
 
 
 3. We need to edit "service/auto-tracing-mutating-webhook" from CluaterIP to "LoadBalancer" using below command:
 
-   ```execute
-   kubectl edit service/auto-tracing-mutating-webhook
-  ```
+
+```execute
+ kubectl edit service/auto-tracing-mutating-webhook
+```
   
   
 on vi editor, change Type from "ClusterIP" to "LoadBalancer"
@@ -126,7 +127,7 @@ on vi editor, change Type from "ClusterIP" to "LoadBalancer"
 kubectl get all
  ```
  
- A similar to this output will be shown:
+A similar to this output will be shown:
  
 ``` 
 NAME                                                 READY   STATUS    RESTARTS   AGE
@@ -153,9 +154,9 @@ replicaset.apps/jaeger-788f55ddc9                          1         1         1
   
 5. Lastly make sure you label the target namespace so that the webhook gets activated for any deployment within using below command:
 
- ```execute  
- kubectl label namespace default autotrace=enabled
- ```
+```execute  
+kubectl label namespace default autotrace=enabled
+```
  
  
 6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
@@ -178,7 +179,7 @@ spec:
       name: service-a
       labels:
         app: service-a
-        **autotrace: enabled**
+        autotrace: enabled
  ```
     
  Deploy the services.yaml using below command:
@@ -228,6 +229,7 @@ replicaset.apps/service-a-56dc4665b7                       1         1         1
 replicaset.apps/service-b-66944b7dcc                       1         1         1       19s
 replicaset.apps/service-c-78bb44b7d5                       1         1         1       19s
 ```
+
 
 8. Edit the "service/service-a" type from "ClusterIP" to "LoadBalancer" using below command: 
   
