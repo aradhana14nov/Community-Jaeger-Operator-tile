@@ -31,18 +31,21 @@ The recommended solution is to annotate spans with tags or logs.
 
 **Span Context:** A set of trace identifiers injected into each request, which the next service will extract and use to propagate the trace.
 
+
 ![](_images/span-context.png)
 
 **Trace:** A trace is a data/execution path through the system and can be thought of as a directed acyclic graph (DAG) of spans. 
 
 Below is a diagrammatic view of DAG. Each trace has a unique identifier (ex: a trace id) for the trace, as span context that is propagated over the network to the next request.
 
+
 ![](_images/distributedtracingpic3.png)
 
 **Baggage:** Key-value pairs are added to the span context and propagated throughout the trace.
 An external process can inject baggage by setting the special HTTP Header jaeger-baggage on a request.
 
-Tools for Distributed Tracing
+### Tools for Distributed Tracing
+
 There are three popular open source tools that can be used for distributed tracing in microservices:
 
 - Zipkin
