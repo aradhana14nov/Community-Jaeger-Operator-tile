@@ -39,5 +39,138 @@ Below is a diagrammatic view of DAG. Each trace has a unique identifier (ex: a t
 **Baggage:** Key-value pairs are added to the span context and propagated throughout the trace.
 An external process can inject baggage by setting the special HTTP Header jaeger-baggage on a request.
 
+Tools for Distributed Tracing
+There are three popular open source tools that can be used for distributed tracing in microservices:
+
+- Zipkin
+- Jaeger
+- AppDash
+
+We will use here Jaeger for distributed tracing in microservices.
+
+### Enabling Tracing for an Application
+
+We will take a simple example to understand how Jaeger can be used to trace microservices.
+There’s some small amount of development required to get tracing hooked up in the first place.
+For opentracing in this perticular example of src code,Java special agent is used. 
+By plugging this into our app via the -javaagent JVM flag we can fully enable tracing across any commonly used 3rd party libraries without changing any code or rebuilding the project.
+What we’ll do here is automatically plug-in this agent at deployment time using a combination of webhook, init container and tweaking of environment variables to insert the agent.
+
+This full source of webhook will:
+- Check the incoming deployment descriptor for the correct tags (autotrace: enabled). If present it’ll apply steps 2 onward, otherwise it’ll leave everything untouched.
+- Add a volume mount into which the opentracing special agent jar will be dropped.
+- Add an init container to copy the jar into the shared mount before the application boots.
+- Tweak the JAVA_TOOL_OPTIONS environment variable to add the javaagent line for the agent.
+
+
+### Deploy the Application in Kubernetes Cluster:
+
+1. First make sure you have Jaeger running in your default namespace using below command:
+
+```execute
+kubectl get all 
+```
+
+Output will be similar to below output:
+
+```
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/jaeger-788f55ddc9-ztglr   1/1     Running   0          36s
+
+NAME                                TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
+service/jaeger-agent                ClusterIP      None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      36s
+service/jaeger-collector            ClusterIP      10.100.20.172   <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   36s
+service/jaeger-collector-headless   ClusterIP      None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   36s
+service/jaeger-query                LoadBalancer   10.105.144.48   <pending>     16686:31831/TCP                          36s
+service/kubernetes                  ClusterIP      10.96.0.1       <none>        443/TCP                                  17h
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/jaeger   1/1     1            1           36s
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/jaeger-788f55ddc9   1         1         1       36s
+```
+
+2. Deploy the webhook itself. The source for which is available here: 
+
+  We can get the webhook.yaml file from : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
+  
+  Deploy the webhook application using below command:
+  
+  ```execute
+  kubectl create -f /home/student/projects/Community-Jaeger-Operator-tile/webhook.yaml
+  ```
+  
+  You will see below output:
+  
+```
+service/auto-tracing-mutating-webhook created
+deployment.apps/auto-tracing-mutating-webhook created
+mutatingwebhookconfiguration.admissionregistration.k8s.io/auto-tracing-mutating-webhook created
+```
+
+3. We need to edit "service/auto-tracing-mutating-webhook" from CluaterIP to "LoadBalancer" using below command:
+
+   ```execute
+   kubectl edit service/auto-tracing-mutating-webhook
+  ```
+  
+  on vi editor, change Type from "ClusterIP" to "LoadBalancer"
+  
+  
+4. Chaeck the status of all the resources created are in "Running" state:
+
+ ```execute
+  kubectl get all
+ ```
+ A similar to this output will be shown:
+ 
+``` 
+NAME                                                 READY   STATUS    RESTARTS   AGE
+pod/auto-tracing-mutating-webhook-67bd68dd77-ks7km   1/1     Running   0          94s
+pod/jaeger-788f55ddc9-2cj4n                          1/1     Running   0          4m19s
+
+NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                                  AGE
+service/auto-tracing-mutating-webhook   LoadBalancer   10.100.35.237   <pending>     443:32687/TCP                            94s
+service/jaeger-agent                    ClusterIP      None            <none>        5775/UDP,5778/TCP,6831/UDP,6832/UDP      4m19s
+service/jaeger-collector                ClusterIP      10.111.142.2    <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   4m19s
+service/jaeger-collector-headless       ClusterIP      None            <none>        9411/TCP,14250/TCP,14267/TCP,14268/TCP   4m19s
+service/jaeger-query                    LoadBalancer   10.109.253.83   <pending>     16686:30709/TCP                          4m19s
+service/kubernetes                      ClusterIP      10.96.0.1       <none>        443/TCP                                  130m
+
+NAME                                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/auto-tracing-mutating-webhook   1/1     1            1           94s
+deployment.apps/jaeger                          1/1     1            1           4m19s
+
+NAME                                                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/auto-tracing-mutating-webhook-67bd68dd77   1         1         1       94s
+replicaset.apps/jaeger-788f55ddc9                          1         1         1       4m19s
+
+```
+  
+5. Lastly make sure you label the target namespace so that the webhook gets activated for any deployment within using below command:
+
+ ```execute  
+ kubectl label namespace default autotrace=enabled
+ ```
+ 
+ 6. We’ll need to demonstrate a request across multiple services to show end-to-end the tracing working well.
+ 
+    We have "services.yaml" file at : https://github.com/aradhana14nov/Community-Jaeger-Operator-tile/
+    
+   "services.yaml" creates a chain of services A, B and C. A calls B, B calls C and C calls upstream to the world clock API. 
+   Each of the services is, by default, a completely trace unaware Spring Boot application.
+    
+   Deploy the services.yaml using below command:
+    
+  ```execute
+  kubectl create -f /home/student/projects/Community-Jaeger-Operator-tile/services.yaml
+  ```
+  
+  
+
+ 
+
+
 
 
