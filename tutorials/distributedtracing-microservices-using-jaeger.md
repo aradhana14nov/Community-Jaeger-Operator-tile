@@ -10,15 +10,16 @@ Distributed Tracing is a technique to follow a single transaction, which often r
 ### Why Distributed Tracing Is Required
 Distributed tracing enables developers to perform:
 
-Distributed transaction monitoring.
-Troubleshooting and root cause analysis.
-Performance and latency optimization.
-Service dependency analysis.
-Identification of the quality and reliability of software.
-Distributed context propagation.
+- Distributed transaction monitoring.
+- Troubleshooting and root cause analysis.
+- Performance and latency optimization.
+- Service dependency analysis.
+- Identification of the quality and reliability of software.
+- Distributed context propagation.
 
 
 ### Key Terms in Distributed Tracing
+
 **Span:** A span represents a logical unit of work in Jaeger that has an operation name, the start time of the operation and the duration. Spans may be nested and ordered to model causal relationships. 
 The recommended solution is to annotate spans with tags or logs.
 
