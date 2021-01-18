@@ -17,11 +17,11 @@ Follow below steps to check traces on Jaeger UI:
 
 ![](_images/operations.png)
 
-3. You can see number of traces produces with the unique trace id as shown in below snapshot.
+3. You can see number of traces produced with the unique trace id as shown in below snapshot.
 
  ![](_images/see-detailed-trace-of-all-the-services.png)
 
-4. You will see all the three services traces as shown in below snapshot:
+4. Click on the trace id and you will see all the three services traces as shown in below snapshot:
 
 ![](_images/services-tracing.PNG)
 
