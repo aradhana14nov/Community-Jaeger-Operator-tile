@@ -9,7 +9,7 @@ Once our microservices are successfully configured for auto-tracing we can check
 
 Follow below steps to check traces on Jaeger UI:
 
-1. On the services dropdown you will see all these services which are deployed on cluster and enabled for autotrace as shown in below snapshot: 
+1. On the "Service" dropdown, you will see all services which are deployed on cluster and enabled for autotrace as shown in below snapshot: 
 
 ![](_images/service-autotracing-jaeger-ui.png)
 
