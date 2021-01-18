@@ -11,15 +11,15 @@ Follow below steps to check traces on Jaeger UI:
 
 1. On the services dropdown you will see all these services which are deployed on cluster and enabled for autotrace as shown in below snapshot: 
 
-![](_images/service-autotracing-jaeger-ui.PNG)
+![](_images/service-autotracing-jaeger-ui.png)
 
 2. Select "service-a" from drop down. You can select the operations you want to trace using "Operation" drop-down and other drop-down options provided by the UI and click on "Find Traces" button.
 
-![](_images/operations.PNG)
+![](_images/operations.png)
 
 3. You can see number of traces produces with the unique trace id as shown in below snapshot.
 
- ![](_images/see-detailed-trace-of-all-the-services.PNG)
+ ![](_images/see-detailed-trace-of-all-the-services.png)
 
 4. You will see all the three services traces as shown in below snapshot:
 
@@ -27,17 +27,17 @@ Follow below steps to check traces on Jaeger UI:
 
 5. Also to get more details, you can expand the traces view by clicking on small down arrow option "v" against each services. You will see something similar to below snapshot:
 
-![](_images/services-expanded-form.PNG)
+![](_images/services-expanded-form.png)
 
 You can also see the logs and warning details against each services operations: "Pass" and "Get" which will provide important information while tracing your services.
 
-![](_images/logging-warning-msg.PNG)
+![](_images/logging-warning-msg.png)
 
 
 6. You can compare two traces by selecting the check box corresponding to each trace id and click on "Compare" option as shown in below snapshot a:
 
 
-![](_images/compare-services-traces.PNG)
+![](_images/compare-services-traces.png)
 
 You will see the flow how these services : service-a,service-b and service-c requests flows using "Compare" option.
 
