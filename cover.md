@@ -67,4 +67,13 @@ Query is a service that retrieves traces from storage and hosts a UI to display 
 Ingester is a service that reads from Kafka topic and writes to another storage backend (Cassandra, Elasticsearch).
 
 
+### Objective of tutorial
+
+In this tutorial,we are going to cover following topics:
+
+1. Install Jaeger Operator and verify its successful installation.
+2. Create Jaeger Instance and verify status of pods and all other resources.
+3. How to autotrace microservices using Jaeger
+4. How to check distributed tracing of services using Jaeger UI
+5. Cleanup Operator
 
