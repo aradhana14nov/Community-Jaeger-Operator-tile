@@ -12,7 +12,7 @@ spec:
       targetPort: 8080
   selector:
     app: service-a
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: Service
